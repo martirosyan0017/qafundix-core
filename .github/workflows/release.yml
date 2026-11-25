@@ -1,0 +1,67 @@
+# Manual release to GitHub Packages.
+#
+# Nothing runs automatically: a maintainer starts it from the Actions tab ("Run workflow").
+# By default it only validates and shows what would be published (dry run).
+# A real publish needs all three:
+#   1. the "publish" box ticked,
+#   2. the run started from the main branch,
+#   3. approval in the "github-packages" environment, if reviewers are configured there
+#      (Settings -> Environments -> github-packages -> Required reviewers).
+# Package visibility is not changed by this workflow.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release; must equal package.json (for example 1.1.0)'
+        required: true
+        type: string
+      publish:
+        description: 'Publish to GitHub Packages (leave unticked for a dry run)'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: github-packages
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: '@martirosyan0017'
+
+      - name: Check the requested version matches package.json
+        env:
+          REQUESTED: ${{ inputs.version }}
+        run: |
+          ACTUAL=$(node -p "require('./package.json').version")
+          if [ "$ACTUAL" != "$REQUESTED" ]; then
+            echo "::error::package.json is $ACTUAL but $REQUESTED was requested"
+            exit 1
+          fi
+
+      - run: npm ci
+      - run: npm run validate
+      - run: npm pack --dry-run
+
+      - name: Publish
+        if: inputs.publish && github.ref == 'refs/heads/main'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Dry run summary
+        if: ${{ !(inputs.publish && github.ref == 'refs/heads/main') }}
+        run: echo "Dry run only. Nothing was published."

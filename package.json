@@ -1,0 +1,73 @@
+{
+  "name": "@martirosyan0017/qafundix-core",
+  "version": "1.1.0",
+  "description": "QAFundix: a foundation for QA automation. Configuration, environment variables, logging, errors and retry for TypeScript test projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martirosyan0017/qafundix-core.git"
+  },
+  "homepage": "https://github.com/martirosyan0017/qafundix-core#readme",
+  "bugs": {
+    "url": "https://github.com/martirosyan0017/qafundix-core/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:examples": "tsc --noEmit -p tsconfig.examples.json",
+    "examples": "node examples/basic-usage.ts && node examples/resilient-checks.ts",
+    "validate": "npm run typecheck && npm run test:coverage && npm run lint && npm run format:check && npm run build && npm run typecheck:examples",
+    "prepublishOnly": "npm run validate"
+  },
+  "keywords": [
+    "qafundix",
+    "qa",
+    "automation",
+    "typescript",
+    "testing"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "^5.1.1",
+    "eslint": "^10.15.0",
+    "prettier": "^3.10.1",
+    "tsup": "^9.0.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^5.1.1"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "pino": "^10.4.0",
+    "zod": "^4.6.7"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"],
+    // Reject TypeScript-only syntax that Node.js cannot strip, so `node examples/*.ts` keeps working.
+    "erasableSyntaxOnly": true
+  },
+  "include": ["examples/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
