@@ -3,7 +3,7 @@
 All notable changes to this package are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the package uses [Semantic Versioning](https://semver.org/).
 
-## 1.1.0 - Unreleased
+## 1.1.0 - 2026-11-25
 
 The project is renamed to **QAFundix**. The package is now `@martirosyan0017/qafundix-core` and the repository is `martirosyan0017/qafundix-core`; earlier versions were developed as `@martirosyan0017/qa-automation-core`. To upgrade, install the new package and replace the old package name in your imports. The API is unchanged.
 
@@ -30,7 +30,10 @@ All additions are backward compatible. Existing code keeps compiling and running
 - Unit tests are split into one file per module. Coverage reporting with thresholds, `npm run validate`, and type-checked examples.
 - `npm run examples` runs the examples with Node.js type stripping; CI runs it too. The examples typecheck uses `erasableSyntaxOnly`, so syntax that `node file.ts` cannot run is reported.
 - CommonJS projects can load Core with `require()` on Node.js 22.12 or later: the package `exports` now has a `default` condition next to `import`. ES module users see no difference.
-- README: a step-by-step getting-started guide, separate GitHub Packages and local package installation paths, setup guides for Appium + WebdriverIO, Playwright, Playwright API and PostgreSQL projects, and an exact description of how logger redaction matches keys.
+- Documentation: a short README landing page; step-by-step setup guides in `docs/` for mobile (Appium + WebdriverIO), web (Playwright), API (Playwright API) and database (PostgreSQL) projects; separate pages for getting started, configuration, logging (including exactly how redaction matches keys), retry, errors, utilities and troubleshooting; and `CONTRIBUTING.md` for development and releases. README links are absolute, so they also work on the package page.
+- `SECURITY.md` with instructions for private vulnerability reporting.
+- `package.json` lists the author and search keywords.
+- The CI and release workflows use `actions/checkout`, `actions/setup-node` and `actions/upload-artifact` v7.
 - CI on Linux and Windows with Node.js 22 and 24, Dependabot, and a manual GitHub Packages release workflow (dry run by default).
 - `.gitattributes` so all text files use LF line endings on every operating system.
 

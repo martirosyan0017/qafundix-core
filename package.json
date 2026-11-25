@@ -50,9 +50,16 @@
     "qafundix",
     "qa",
     "automation",
+    "test-automation",
     "typescript",
-    "testing"
+    "testing",
+    "playwright",
+    "appium",
+    "webdriverio",
+    "api-testing",
+    "postgresql"
   ],
+  "author": "Karen Martirosyan",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
