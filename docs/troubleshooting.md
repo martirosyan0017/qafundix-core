@@ -2,7 +2,7 @@
 
 [← Back to README](../README.md)
 
-Problems with installing and using Core. Framework-specific problems are listed at the end of each setup guide: [Mobile](mobile-automation.md#11-common-problems-and-solutions) · [Web](web-automation.md#11-common-problems-and-solutions) · [API](api-automation.md#11-common-problems-and-solutions) · [Database](database-automation.md#11-common-problems-and-solutions).
+Problems with installing and using Core. Framework-specific problems are listed at the end of each setup guide: [Mobile](mobile-automation.md#problems) · [Web](web-automation.md#problems) · [API](api-automation.md#problems) · [Database](database-automation.md#problems).
 
 ## Installation and authentication
 

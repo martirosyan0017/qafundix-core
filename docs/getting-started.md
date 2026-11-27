@@ -2,7 +2,7 @@
 
 [← Back to README](../README.md)
 
-This page installs Core into any TypeScript project and runs a small script that uses configuration, environment variables, logging and retry. If you are starting a Playwright, Appium, API or PostgreSQL project, the [setup guides](../README.md#choose-your-automation-type) are quicker: they include everything on this page.
+This page installs Core into any TypeScript project and runs a small script that uses configuration, environment variables, logging and retry. If you are starting a Playwright, Appium, API or PostgreSQL project, the [setup guides](../README.md#start-your-project) are quicker: they include everything on this page.
 
 **Contents:** [1. Check your tools](#1-check-your-tools) · [2. Install the package](#2-install-the-package) · [3. Prepare your project](#3-prepare-your-project) · [4. Add environment values](#4-add-environment-values) · [5. Run your first check](#5-run-your-first-check) · [6. Share one setup module](#6-share-one-setup-module)
 
