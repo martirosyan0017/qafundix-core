@@ -1,3 +1,4 @@
+import { ERROR_CODES } from '../errors/error-codes.js';
 import { FrameworkError } from '../errors/framework-error.js';
 import type { RetryOptions } from '../types/common.types.js';
 
@@ -23,12 +24,12 @@ function validate(options: RetryOptions): void {
 function stoppedError(signal: AbortSignal, attempt: number, timeoutMs?: number): FrameworkError {
   if (signal.reason === TOTAL_TIMEOUT) {
     return new FrameworkError(`Retry timed out after ${timeoutMs} ms`, {
-      code: 'RETRY_TIMEOUT',
+      code: ERROR_CODES.RETRY_TIMEOUT,
       metadata: { attempt, timeoutMs },
     });
   }
   return new FrameworkError('Retry was aborted', {
-    code: 'RETRY_ABORTED',
+    code: ERROR_CODES.RETRY_ABORTED,
     metadata: { attempt },
     cause: signal.reason,
   });
@@ -91,7 +92,7 @@ async function runAttempt<T>(
   const signal = AbortSignal.any([runSignal, attemptController.signal]);
   const timeoutError = new FrameworkError(
     `Attempt ${attempt} timed out after ${attemptTimeoutMs} ms`,
-    { code: 'RETRY_ATTEMPT_TIMEOUT', metadata: { attempt, attemptTimeoutMs } },
+    { code: ERROR_CODES.RETRY_ATTEMPT_TIMEOUT, metadata: { attempt, attemptTimeoutMs } },
   );
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
@@ -159,7 +160,7 @@ export async function retry<T>(
     }
     throw new FrameworkError(
       `Operation failed after ${attempts} attempt${attempts === 1 ? '' : 's'}`,
-      { code: 'RETRY_EXHAUSTED', metadata: { attempts }, cause: lastError },
+      { code: ERROR_CODES.RETRY_EXHAUSTED, metadata: { attempts }, cause: lastError },
     );
   } finally {
     clearTimeout(totalTimer);

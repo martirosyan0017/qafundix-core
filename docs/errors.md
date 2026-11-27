@@ -52,6 +52,30 @@ try {
 
 Wrong arguments to Core functions, such as `attempts: 0` or an invalid `Date`, throw a standard `RangeError` or `TypeError` instead, because they are programming mistakes rather than test failures.
 
+## Check codes without typos
+
+Use the `ERROR_CODES` constants and `isFrameworkError` instead of comparing strings. `isFrameworkError` also tells TypeScript that the value is a `FrameworkError`:
+
+```ts
+import { ERROR_CODES, Logger, isFrameworkError, retry } from '@martirosyan0017/qafundix-core';
+
+const logger = new Logger({ name: 'errors-example' });
+
+try {
+  await retry(() => fetch('https://example.com'), { attempts: 2, timeoutMs: 10_000 });
+} catch (error) {
+  if (isFrameworkError(error, ERROR_CODES.RETRY_TIMEOUT)) {
+    logger.warn('Service too slow', { timeoutMs: error.metadata.timeoutMs });
+  } else if (isFrameworkError(error)) {
+    logger.error('Core error', { code: error.code });
+  } else {
+    throw error;
+  }
+}
+```
+
+`isFrameworkError(error, code)` works for your own codes too, for example `isFrameworkError(error, 'ORDER_NOT_FOUND')`.
+
 ## Related
 
 - [Configuration](configuration.md) and [Retry](retry.md): where these codes come from

@@ -1,6 +1,7 @@
 export { ConfigLoader } from './config/config-loader.js';
 export { commonConfigSchema, type ValidatedCommonConfig } from './config/config.schema.js';
 export { EnvironmentManager, type NumberVariableOptions } from './environment/environment.js';
+export { ERROR_CODES, isFrameworkError, type CoreErrorCode } from './errors/error-codes.js';
 export { FrameworkError } from './errors/framework-error.js';
 export {
   DEFAULT_REDACT_KEYS,

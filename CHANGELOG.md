@@ -3,6 +3,22 @@
 All notable changes to this package are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the package uses [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+All changes are backward compatible.
+
+### Added
+
+- `ERROR_CODES` (every code Core throws), the `CoreErrorCode` type, and `isFrameworkError(error, code?)`, a type guard for checking errors without comparing strings by hand.
+- `npm run test:package`: installs the packed package into a fresh project and checks ESM `import`, CommonJS `require()` and TypeScript types. CI runs it on every operating system and Node.js version.
+- A test that fails when a public export is removed or renamed.
+- `package.json`: `"sideEffects": false` and an export for `./package.json`.
+
+### Changed
+
+- GitHub Actions are pinned to full commit SHAs (with version comments that Dependabot keeps current), checkouts no longer keep the token in the workspace (`persist-credentials: false`), and jobs have time limits.
+- Core's own source uses `ERROR_CODES` instead of string literals. The thrown codes are unchanged.
+
 ## 1.1.0 - 2026-11-25
 
 The project is renamed to **QAFundix**. The package is now `@martirosyan0017/qafundix-core` and the repository is `martirosyan0017/qafundix-core`; earlier versions were developed as `@martirosyan0017/qa-automation-core`. To upgrade, install the new package and replace the old package name in your imports. The API is unchanged.
