@@ -32,7 +32,7 @@ toIsoString(addMilliseconds(start, 90_000)); // '2026-01-01T00:01:30.000Z' (inpu
 
 ## Types
 
-Core also exports TypeScript types for your own helpers: `ENVIRONMENTS`, `EnvironmentName`, `LogLevel`, `CommonConfig`, `ValidatedCommonConfig`, `RetryOptions`, `RetryAttemptInfo`, `NumberVariableOptions`, `LoggerConstructorOptions`, `RedactionOptions`, and `FrameworkErrorOptions`.
+Core also exports TypeScript types for your own helpers: `ENVIRONMENTS`, `CoreErrorCode`, `EnvironmentName`, `LogLevel`, `CommonConfig`, `ValidatedCommonConfig`, `RetryOptions`, `RetryAttemptInfo`, `NumberVariableOptions`, `LoggerConstructorOptions`, `RedactionOptions`, and `FrameworkErrorOptions`.
 
 ```ts
 import type { LogLevel, RetryOptions } from '@martirosyan0017/qafundix-core';

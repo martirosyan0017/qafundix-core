@@ -1,4 +1,5 @@
 import { config as loadDotEnv } from 'dotenv';
+import { ERROR_CODES } from '../errors/error-codes.js';
 import { FrameworkError } from '../errors/framework-error.js';
 import { ENVIRONMENTS, type EnvironmentName } from '../types/common.types.js';
 
@@ -28,7 +29,7 @@ export class EnvironmentManager {
     const value = this.variables.NODE_ENV ?? 'development';
     if ((ENVIRONMENTS as readonly string[]).includes(value)) return value as EnvironmentName;
     throw new FrameworkError(`Unsupported NODE_ENV value: ${value}`, {
-      code: 'INVALID_ENVIRONMENT',
+      code: ERROR_CODES.INVALID_ENVIRONMENT,
       metadata: { variable: 'NODE_ENV', value },
     });
   }
@@ -41,7 +42,7 @@ export class EnvironmentManager {
     const value = this.get(key)?.trim();
     if (!value) {
       throw new FrameworkError(`Required environment variable ${key} is missing or empty`, {
-        code: 'MISSING_ENVIRONMENT_VARIABLE',
+        code: ERROR_CODES.MISSING_ENVIRONMENT_VARIABLE,
         metadata: { variable: key },
       });
     }
@@ -52,7 +53,7 @@ export class EnvironmentManager {
     const missing = keys.filter((key) => !this.variables[key]?.trim());
     if (missing.length) {
       throw new FrameworkError(`Missing required environment variables: ${missing.join(', ')}`, {
-        code: 'MISSING_ENVIRONMENT_VARIABLES',
+        code: ERROR_CODES.MISSING_ENVIRONMENT_VARIABLES,
         metadata: { variables: missing },
       });
     }
@@ -144,7 +145,7 @@ export class EnvironmentManager {
   // The raw value is left out of the message and metadata in case it is a secret.
   #invalid(key: string, rule: string): FrameworkError {
     return new FrameworkError(`Environment variable ${key} ${rule}`, {
-      code: 'INVALID_ENVIRONMENT_VARIABLE',
+      code: ERROR_CODES.INVALID_ENVIRONMENT_VARIABLE,
       metadata: { variable: key },
     });
   }

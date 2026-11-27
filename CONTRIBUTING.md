@@ -40,20 +40,21 @@ Only `dist/`, `README.md`, `CHANGELOG.md`, `LICENSE`, and `package.json` are pub
 
 ## Commands
 
-| Command                      | What it does                                                                                                                         |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `npm test`                   | Runs all unit tests once.                                                                                                            |
-| `npm run test:watch`         | Re-runs tests when files change. Stop with `Ctrl+C`.                                                                                 |
-| `npm run test:coverage`      | Runs tests and fails if coverage drops below the thresholds. HTML report: `coverage/index.html`.                                     |
-| `npm run typecheck`          | Checks TypeScript types in `src/`, `tests/` and config files without building.                                                       |
-| `npm run lint`               | Finds code problems with ESLint.                                                                                                     |
-| `npm run format`             | Rewrites files with Prettier formatting.                                                                                             |
-| `npm run format:check`       | Reports files that are not formatted, without changing them.                                                                         |
-| `npm run build`              | Builds `dist/` (ESM JavaScript, type declarations, source maps).                                                                     |
-| `npm run typecheck:examples` | Type-checks `examples/` against the built package. Run `npm run build` first.                                                        |
-| `npm run examples`           | Runs both files in `examples/` with `node` (Node.js 22.18+). Run `npm run build` first; `resilient-checks.ts` needs internet access. |
-| `npm run validate`           | Runs typecheck, coverage, lint, format check, build, and example typecheck in that order.                                            |
-| `npm pack --dry-run`         | Lists the files that would be published, without creating anything.                                                                  |
+| Command                      | What it does                                                                                                                                          |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm test`                   | Runs all unit tests once.                                                                                                                             |
+| `npm run test:watch`         | Re-runs tests when files change. Stop with `Ctrl+C`.                                                                                                  |
+| `npm run test:coverage`      | Runs tests and fails if coverage drops below the thresholds. HTML report: `coverage/index.html`.                                                      |
+| `npm run typecheck`          | Checks TypeScript types in `src/`, `tests/` and config files without building.                                                                        |
+| `npm run lint`               | Finds code problems with ESLint.                                                                                                                      |
+| `npm run format`             | Rewrites files with Prettier formatting.                                                                                                              |
+| `npm run format:check`       | Reports files that are not formatted, without changing them.                                                                                          |
+| `npm run build`              | Builds `dist/` (ESM JavaScript, type declarations, source maps).                                                                                      |
+| `npm run typecheck:examples` | Type-checks `examples/` against the built package. Run `npm run build` first.                                                                         |
+| `npm run examples`           | Runs both files in `examples/` with `node` (Node.js 22.18+). Run `npm run build` first; `resilient-checks.ts` needs internet access.                  |
+| `npm run validate`           | Runs typecheck, coverage, lint, format check, build, and example typecheck in that order.                                                             |
+| `npm pack --dry-run`         | Lists the files that would be published, without creating anything.                                                                                   |
+| `npm run test:package`       | Packs Core, installs it into a fresh project, and checks `import`, `require()` and TypeScript types. Run `npm run build` first; needs network access. |
 
 Coverage thresholds are 95% for statements, lines, and functions, and 90% for branches. Core is shared by every automation project, so a regression here breaks all of them, and the fast, service-free test suite keeps high coverage cheap.
 
